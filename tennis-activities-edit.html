@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Activities - Edit Activity</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--font-family);
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            min-width: 150px;
+        }
+
+        .checkbox-item input {
+            margin-right: 8px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-container {
+            margin-top: 30px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 20px;
+            display: none;
+        }
+
+        .copy-btn {
+            margin-top: 15px;
+            background-color: #28a745;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            margin: 0 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+
+        .activity-select-container {
+            margin-bottom: 30px;
+        }
+
+        #activitySelect {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--font-family);
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .load-json-container {
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        #jsonInput {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .checkbox-item {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Tennis Activity</h1>
+
+        <div class="navigation">
+            <a href="index.html">View Activities</a> | 
+            <a href="tennis-activities-add.html">Add Activity</a>
+        </div>
+
+        <div id="successMessage" class="success-message">
+            Activity data has been updated successfully!
+        </div>
+
+        <div id="errorMessage" class="error-message">
+            Please fill out all required fields.
+        </div>
+
+        <div class="activity-select-container">
+            <h2>Select Activity to Edit</h2>
+            <p>Choose an activity from the dropdown or paste JSON to load an activity:</p>
+            <select id="activitySelect">
+                <option value="">-- Select an activity --</option>
+                <!-- Activities will be loaded here -->
+            </select>
+        </div>
+
+        <div class="load-json-container">
+            <h3>Or Load from JSON</h3>
+            <textarea id="jsonInput" placeholder="Paste activity JSON here..."></textarea>
+            <button id="loadJsonBtn" class="btn btn-secondary">Load from JSON</button>
+        </div>
+
+        <form id="activityForm">
+            <div class="form-group">
+                <label for="activityName">Activity Name*</label>
+                <input type="text" id="activityName" name="activityName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description*</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="purpose">Purpose*</label>
+                <textarea id="purpose" name="purpose" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration*</label>
+                <input type="text" id="duration" name="duration" placeholder="e.g. 10-15 minutes" required>
+            </div>
+
+            <div class="form-group">
+                <label for="variations">Variations*</label>
+                <textarea id="variations" name="variations" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="courtSetup">Court Setup*</label>
+                <select id="courtSetup" name="courtSetup" required>
+                    <option value="">-- Select --</option>
+                    <option value="one court">One Court</option>
+                    <option value="multiple courts">Multiple Courts</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="groupSize">Group Size*</label>
+                <select id="groupSize" name="groupSize" required>
+                    <option value="">-- Select --</option>
+                    <option value="4-10">4-10</option>
+                    <option value="10-16">10-16</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="courtType">Court Type*</label>
+                <select id="courtType" name="courtType" required>
+                    <option value="">-- Select --</option>
+                    <option value="mini">Mini</option>
+                    <option value="standard">Standard</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gradeLevel">Student Grade Level*</label>
+                <select id="gradeLevel" name="gradeLevel" required>
+                    <option value="">-- Select --</option>
+                    <option value="Elementary">Elementary</option>
+                    <option value="Middle">Middle</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="skillLevel">Skill Level*</label>
+                <select id="skillLevel" name="skillLevel" required>
+                    <option value="">-- Select --</option>
+                    <option value="beginners only">Beginners Only</option>
+                    <option value="mixed skills">Mixed Skills</option>
+                    <option value="returners only">Returners Only</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Ball Type</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ballRed" name="ballRed">
+                        <label for="ballRed">Red</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ballOrange" name="ballOrange">
+                        <label for="ballOrange">Orange</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ballGreenYellow" name="ballGreenYellow">
+                        <label for="ballGreenYellow">Green/Yellow</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Technical Focus</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="fhFocus" name="fhFocus">
+                        <label for="fhFocus">Forehand</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bhFocus" name="bhFocus">
+                        <label for="bhFocus">Backhand</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Skill Focus</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="rallyBuilding" name="rallyBuilding">
+                        <label for="rallyBuilding">Rally Building</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="volley" name="volley">
+                        <label for="volley">Volley</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="overhead" name="overhead">
+                        <label for="overhead">Overhead</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="serve" name="serve">
+                        <label for="serve">Serve</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Rules Knowledge</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="pointPlay" name="pointPlay">
+                        <label for="pointPlay">Point Play</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consistency" name="consistency">
+                        <label for="consistency">Consistency</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="footwork" name="footwork">
+                        <label for="footwork">Footwork</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>SEL Goals</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sportsmanship" name="sportsmanship">
+                        <label for="sportsmanship">Sportsmanship</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="teamwork" name="teamwork">
+                        <label for="teamwork">Teamwork</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="problemSolving" name="problemSolving">
+                        <label for="problemSolving">Problem-solving</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="positiveReinforcement" name="positiveReinforcement">
+                        <label for="positiveReinforcement">Positive Reinforcement</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="button" id="updateBtn" class="btn btn-primary">Update JSON</button>
+                <button type="reset" id="resetBtn" class="btn btn-secondary">Reset Form</button>
+            </div>
+        </form>
+
+        <div id="outputContainer" class="output-container">
+            <h3>Updated JSON</h3>
+            <p>Copy this JSON and update your data file:</p>
+            <pre id="jsonOutput"></pre>
+            <button id="copyBtn" class="btn copy-btn">Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activitySelect = document.getElementById('activitySelect');
+            const form = document.getElementById('activityForm');
+            const updateBtn = document.getElementById('updateBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const jsonOutput = document.getElementById('jsonOutput');
+            const outputContainer = document.getElementById('outputContainer');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const jsonInput = document.getElementById('jsonInput');
+            const loadJsonBtn = document.getElementById('loadJsonBtn');
+            
+            // Fetch tennis activities data
+            fetchActivities();
+            
+            // Load JSON button click
+            loadJsonBtn.addEventListener('click', function() {
+                try {
+                    const jsonData = JSON.parse(jsonInput.value);
+                    populateForm(jsonData);
+                    successMessage.textContent = 'Activity data loaded successfully!';
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 3000);
+                } catch (error) {
+                    errorMessage.textContent = 'Invalid JSON format. Please check and try again.';
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                }
+            });
+
+            // Activity selection change
+            activitySelect.addEventListener('change', function() {
+                if (this.value) {
+                    fetchActivityData(this.value);
+                } else {
+                    resetForm();
+                }
+            });
+
+            // Update JSON when button is clicked
+            updateBtn.addEventListener('click', function() {
+                if (!validateForm()) {
+                    errorMessage.textContent = 'Please fill out all required fields.';
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                    return;
+                }
+
+                const activityData = {
+                    "Activity Name": document.getElementById('activityName').value,
+                    "Description": document.getElementById('description').value,
+                    "Purpose": document.getElementById('purpose').value,
+                    "Duration": document.getElementById('duration').value,
+                    "Variations": document.getElementById('variations').value,
+                    "Court Setup": document.getElementById('courtSetup').value,
+                    "Group Size": document.getElementById('groupSize').value,
+                    "Court Type": document.getElementById('courtType').value,
+                    "Student Grade Level": document.getElementById('gradeLevel').value,
+                    "Skill Level": document.getElementById('skillLevel').value,
+                    "Ball Red": document.getElementById('ballRed').checked,
+                    "Ball Orange": document.getElementById('ballOrange').checked,
+                    "Ball Green/Yellow": document.getElementById('ballGreenYellow').checked,
+                    "FH Focus": document.getElementById('fhFocus').checked,
+                    "BH Focus": document.getElementById('bhFocus').checked,
+                    "Rally Building": document.getElementById('rallyBuilding').checked,
+                    "Volley": document.getElementById('volley').checked,
+                    "Overhead": document.getElementById('overhead').checked,
+                    "Serve": document.getElementById('serve').checked,
+                    "Point Play": document.getElementById('pointPlay').checked,
+                    "Consistency": document.getElementById('consistency').checked,
+                    "Footwork": document.getElementById('footwork').checked,
+                    "Sportsmanship": document.getElementById('sportsmanship').checked,
+                    "Teamwork": document.getElementById('teamwork').checked,
+                    "Problem-solving": document.getElementById('problemSolving').checked,
+                    "Positive Reinforcement": document.getElementById('positiveReinforcement').checked
+                };
+
+                // Format JSON with indentation
+                const formattedJson = JSON.stringify(activityData, null, 4);
+                jsonOutput.textContent = formattedJson;
+                outputContainer.style.display = 'block';
+                
+                successMessage.textContent = 'Activity data updated successfully!';
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+                
+                // Scroll to the output
+                outputContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Reset form
+            resetBtn.addEventListener('click', function() {
+                resetForm();
+                outputContainer.style.display = 'none';
+            });
+
+            // Copy JSON to clipboard
+            copyBtn.addEventListener('click', function() {
+                const textToCopy = jsonOutput.textContent;
+                
+                navigator.clipboard.writeText(textToCopy).then(
+                    function() {
+                        // Success
+                        const originalText = copyBtn.textContent;
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyBtn.textContent = originalText;
+                        }, 2000);
+                    },
+                    function() {
+                        // Fallback for browsers that don't support clipboard API
+                        const textArea = document.createElement('textarea');
+                        textArea.value = textToCopy;
+                        textArea.style.position = 'fixed';
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        
+                        try {
+                            document.execCommand('copy');
+                            const originalText = copyBtn.textContent;
+                            copyBtn.textContent = 'Copied!';
+                            setTimeout(() => {
+                                copyBtn.textContent = originalText;
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Failed to copy: ', err);
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    }
+                );
+            });
+
+            // Fetch activities data and populate select
+            async function fetchActivities() {
+                try {
+                    const response = await fetch('tennis-activities-data.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const activities = await response.json();
+                    
+                    // Clear existing options
+                    activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
+                    
+                    // Add options for each activity
+                    activities.forEach((activity, index) => {
+                        const option = document.createElement('option');
+                        option.value = index;
+                        option.textContent = activity["Activity Name"];
+                        activitySelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error loading activities data:', error);
+                    errorMessage.textContent = 'Error loading activities. Please try refreshing the page.';
+                    errorMessage.style.display = 'block';
+                }
+            }
+
+            // Fetch specific activity data
+            async function fetchActivityData(index) {
+                try {
+                    const response = await fetch('tennis-activities-data.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const activities = await response.json();
+                    
+                    // Populate form with activity data
+                    if (activities[index]) {
+                        populateForm(activities[index]);
+                    }
+                } catch (error) {
+                    console.error('Error loading activity data:', error);
+                    errorMessage.textContent = 'Error loading activity data. Please try again.';
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+
+            // Populate form with activity data
+            function populateForm(activity) {
+                document.getElementById('activityName').value = activity["Activity Name"] || '';
+                document.getElementById('description').value = activity["Description"] || '';
+                document.getElementById('purpose').value = activity["Purpose"] || '';
+                document.getElementById('duration').value = activity["Duration"] || '';
+                document.getElementById('variations').value = activity["Variations"] || '';
+                document.getElementById('courtSetup').value = activity["Court Setup"] || '';
+                document.getElementById('groupSize').value = activity["Group Size"] || '';
+                document.getElementById('courtType').value = activity["Court Type"] || '';
+                document.getElementById('gradeLevel').value = activity["Student Grade Level"] || '';
+                document.getElementById('skillLevel').value = activity["Skill Level"] || '';
+                
+                // Checkboxes
+                document.getElementById('ballRed').checked = activity["Ball Red"] || false;
+                document.getElementById('ballOrange').checked = activity["Ball Orange"] || false;
+                document.getElementById('ballGreenYellow').checked = activity["Ball Green/Yellow"] || false;
+                document.getElementById('fhFocus').checked = activity["FH Focus"] || false;
+                document.getElementById('bhFocus').checked = activity["BH Focus"] || false;
+                document.getElementById('rallyBuilding').checked = activity["Rally Building"] || false;
+                document.getElementById('volley').checked = activity["Volley"] || false;
+                document.getElementById('overhead').checked = activity["Overhead"] || false;
+                document.getElementById('serve').checked = activity["Serve"] || false;
+                document.getElementById('pointPlay').checked = activity["Point Play"] || false;
+                document.getElementById('consistency').checked = activity["Consistency"] || false;
+                document.getElementById('footwork').checked = activity["Footwork"] || false;
+                document.getElementById('sportsmanship').checked = activity["Sportsmanship"] || false;
+                document.getElementById('teamwork').checked = activity["Teamwork"] || false;
+                document.getElementById('problemSolving').checked = activity["Problem-solving"] || false;
+                document.getElementById('positiveReinforcement').checked = activity["Positive Reinforcement"] || false;
+            }
+
+            // Reset form
+            function resetForm() {
+                form.reset();
+                // Also reset activity select
+                activitySelect.value = '';
+            }
+
+            // Validate form
+            function validateForm() {
+                const requiredFields = [
+                    'activityName', 'description', 'purpose', 'duration', 
+                    'variations', 'courtSetup', 'groupSize', 'courtType', 
+                    'gradeLevel', 'skillLevel'
+                ];
+                
+                for (const field of requiredFields) {
+                    const element = document.getElementById(field);
+                    if (!element.value.trim()) {
+                        element.focus();
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+        });
+    </script>
+</body>
+</html>
