@@ -1,3 +1,4 @@
+
 :root {
     --primary-color: #5abb47; /* Green from logo */
     --secondary-color: #6c757d;
@@ -15,7 +16,35 @@
     padding: 15px 20px;
     border-radius: 12px; /* Increased roundness to match logo */
     margin-bottom: 20px;
-    flex-direction: column; /* Make items stack vertically */
+}
+
+.logo-container {
+    max-width: 150px; /* Smaller logo */
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Slightly round the logo edges */
+}
+
+.main-nav {
+    display: flex;
+    gap: 10px; /* Space between navigation items */
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 body {
@@ -28,19 +57,6 @@ body {
     background-color: #f5f5f5;
 }
 
-/* Logo and Header Styles */
-.logo-container {
-    text-align: center; /* Center logo when stacked */
-    margin: 0 0 15px 0; /* Add bottom margin */
-    max-width: 150px; /* Smaller logo */
-}
-
-.logo-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px; /* Slightly round the logo edges */
-}
-
 .app-title {
     padding-top: 10px;
     margin-top: 10px;
@@ -48,26 +64,36 @@ body {
     text-align: center;
 }
 
-/* Navigation */
-.main-nav {
-    display: flex;
-    flex-direction: column; /* Stack navigation items */
-    width: 100%;
-    background-color: transparent;
-    padding: 0;
-    margin: 0;
-    align-items: center;
+/* Rest of the existing CSS remains the same */
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.main-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    margin: 5px 0; /* Vertical margin instead of horizontal */
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    text-align: center;
-    width: 80%; /* Make buttons wider */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-container {
+        margin-bottom: 10px;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .main-nav a {
+        width: 80%;
+        text-align: center;
+        margin: 5px 0;
+    }
 }
 
 .main-nav a:hover {
