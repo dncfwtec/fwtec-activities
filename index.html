@@ -77,31 +77,33 @@
         </div>
         
         <div class="multi-select-container">
-    <label>Ball Type:</label>
-    <div class="multi-select-options" id="ballType">
-        <div class="multi-select-option">
-            <input type="checkbox" 
-                   id="ballRed" 
-                   name="ballType" 
-                   value="Ball Red">
-            <label for="ballRed">Red</label>
+            <label>Skill Focus:</label>
+            <div class="multi-select-options" id="skillFocus">
+                <div class="multi-select-option" data-value="Rally Building">Rally Building</div>
+                <div class="multi-select-option" data-value="Volley">Volley</div>
+                <div class="multi-select-option" data-value="Overhead">Overhead</div>
+                <div class="multi-select-option" data-value="Serve">Serve</div>
+            </div>
         </div>
-        <div class="multi-select-option">
-            <input type="checkbox" 
-                   id="ballOrange" 
-                   name="ballType" 
-                   value="Ball Orange">
-            <label for="ballOrange">Orange</label>
+        
+        <div class="multi-select-container">
+            <label>Rules Knowledge:</label>
+            <div class="multi-select-options" id="rulesKnowledge">
+                <div class="multi-select-option" data-value="Point Play">Point Play</div>
+                <div class="multi-select-option" data-value="Consistency">Consistency</div>
+                <div class="multi-select-option" data-value="Footwork">Footwork</div>
+            </div>
         </div>
-        <div class="multi-select-option">
-            <input type="checkbox" 
-                   id="ballGreenYellow" 
-                   name="ballType" 
-                   value="Ball Green/Yellow">
-            <label for="ballGreenYellow">Green/Yellow</label>
+        
+        <div class="multi-select-container">
+            <label>SEL Goals:</label>
+            <div class="multi-select-options" id="selGoals">
+                <div class="multi-select-option" data-value="Sportsmanship">Sportsmanship</div>
+                <div class="multi-select-option" data-value="Teamwork">Teamwork</div>
+                <div class="multi-select-option" data-value="Problem-solving">Problem-solving</div>
+                <div class="multi-select-option" data-value="Positive Reinforcement">Positive Reinforcement</div>
+            </div>
         </div>
-    </div>
-</div>
         
         <div class="button-container">
             <button class="btn btn-primary" id="filterButton">Find Tennis Activities</button>
@@ -322,27 +324,6 @@
                 container.appendChild(card);
             });
         }
-    document.addEventListener('DOMContentLoaded', function() {
-    // Enhanced multi-select functionality
-    const multiSelectContainers = document.querySelectorAll('.multi-select-options');
-    
-    multiSelectContainers.forEach(container => {
-        const options = container.querySelectorAll('.multi-select-option');
-        
-        options.forEach(option => {
-            option.addEventListener('click', function(event) {
-                // Prevent default to stop any potential native behavior
-                event.preventDefault();
-                
-                // Toggle selected class
-                this.classList.toggle('selected');
-                
-                // Optional: Prevent event from bubbling up
-                event.stopPropagation();
-            });
-        });
-    });
-});    
     </script>
 </body>
 </html>
