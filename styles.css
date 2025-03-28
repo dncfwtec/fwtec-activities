@@ -12,9 +12,10 @@
     align-items: center;
     justify-content: space-between;
     background-color: #5abb47; /* Logo green color */
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 15px 20px;
+    border-radius: 12px; /* Increased roundness to match logo */
     margin-bottom: 20px;
+    flex-direction: column; /* Make items stack vertically */
 }
 
 body {
@@ -29,38 +30,44 @@ body {
 
 /* Logo and Header Styles */
 .logo-container {
-    text-align: left;
-    margin: 0;
-    max-width: 200px; /* Reduced size */
+    text-align: center; /* Center logo when stacked */
+    margin: 0 0 15px 0; /* Add bottom margin */
+    max-width: 150px; /* Smaller logo */
 }
 
 .logo-container img {
     width: 100%;
     height: auto;
+    border-radius: 8px; /* Slightly round the logo edges */
 }
 
 .app-title {
     padding-top: 10px;
     margin-top: 10px;
+    color: var(--primary-color);
+    text-align: center;
 }
 
 /* Navigation */
 .main-nav {
     display: flex;
-    justify-content: center;
-    background-color: var(--primary-color);
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    flex-direction: column; /* Stack navigation items */
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    align-items: center;
 }
 
 .main-nav a {
     color: white;
     text-decoration: none;
     padding: 8px 15px;
-    margin: 0 5px;
+    margin: 5px 0; /* Vertical margin instead of horizontal */
     border-radius: 4px;
     transition: background-color 0.3s;
+    text-align: center;
+    width: 80%; /* Make buttons wider */
 }
 
 .main-nav a:hover {
@@ -444,17 +451,11 @@ pre {
 /* Responsive Styles */
 @media (max-width: 768px) {
     .site-header {
-        flex-direction: column;
         padding: 10px;
     }
     
     .logo-container {
         margin-bottom: 10px;
-    }
-    
-    .main-nav {
-        justify-content: center;
-        width: 100%;
     }
 }
 
@@ -475,16 +476,5 @@ pre {
     
     .activities-container {
         grid-template-columns: 1fr;
-    }
-    
-    .main-nav {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .main-nav a {
-        margin: 5px 0;
-        width: 100%;
-        text-align: center;
     }
 }
