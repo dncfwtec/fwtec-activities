@@ -77,89 +77,31 @@
         </div>
         
         <div class="multi-select-container">
-            <label>Skill Focus:</label>
-            <div class="multi-select-options" id="skillFocus">
-                <div class="multi-select-option" data-value="Rally Building">Rally Building</div>
-                <div class="multi-select-option" data-value="Volley">Volley</div>
-                <div class="multi-select-option" data-value="Overhead">Overhead</div>
-                <div class="multi-select-option" data-value="Serve">Serve</div>
-            </div>
+    <label>Ball Type:</label>
+    <div class="multi-select-options" id="ballType">
+        <div class="multi-select-option">
+            <input type="checkbox" 
+                   id="ballRed" 
+                   name="ballType" 
+                   value="Ball Red">
+            <label for="ballRed">Red</label>
         </div>
-        
-        <div class="multi-select-container">
-            <label>Rules Knowledge:</label>
-            <div class="multi-select-options" id="rulesKnowledge">
-                <div class="multi-select-option" data-value="Point Play">Point Play</div>
-                <div class="multi-select-option" data-value="Consistency">Consistency</div>
-                <div class="multi-select-option" data-value="Footwork">Footwork</div>
-            </div>
+        <div class="multi-select-option">
+            <input type="checkbox" 
+                   id="ballOrange" 
+                   name="ballType" 
+                   value="Ball Orange">
+            <label for="ballOrange">Orange</label>
         </div>
-        
-        <div class="multi-select-container">
-            <label>SEL Goals:</label>
-            <div class="multi-select-options" id="selGoals">
-                <div class="multi-select-option" data-value="Sportsmanship">Sportsmanship</div>
-                <div class="multi-select-option" data-value="Teamwork">Teamwork</div>
-                <div class="multi-select-option" data-value="Problem-solving">Problem-solving</div>
-                <div class="multi-select-option" data-value="Positive Reinforcement">Positive Reinforcement</div>
-            </div>
+        <div class="multi-select-option">
+            <input type="checkbox" 
+                   id="ballGreenYellow" 
+                   name="ballType" 
+                   value="Ball Green/Yellow">
+            <label for="ballGreenYellow">Green/Yellow</label>
         </div>
-
-        /* 
-    MULTI-SELECT CHECKBOX STYLING 
-    ============================
-    Add this block to your existing styles.css file
-    Place it after existing .multi-select-container styles
-*/
-.multi-select-container {
-    margin-bottom: 15px;
-}
-
-.multi-select-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.multi-select-option {
-    position: relative;
-    flex-grow: 1;
-    text-align: center;
-    min-width: 100px;
-}
-
-/* Hide the actual checkbox */
-.multi-select-option input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-/* Style the label to look like the previous button */
-.multi-select-option label {
-    display: block;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0;
-}
-
-/* Style for when checkbox is checked */
-.multi-select-option input[type="checkbox"]:checked + label {
-    background-color: #5abb47; /* Your primary color */
-    color: white;
-    border-color: #5abb47;
-}
-
-.multi-select-option label:hover {
-    background-color: #5abb47;
-    color: white;
-}
+    </div>
+</div>
         
         <div class="button-container">
             <button class="btn btn-primary" id="filterButton">Find Tennis Activities</button>
