@@ -1,4 +1,4 @@
-/* Core Variables */
+
 :root {
     --primary-color: #5abb47; /* Green from logo */
     --secondary-color: #6c757d;
@@ -8,31 +8,30 @@
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Site Header */
 .site-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #5abb47;
+    background-color: #5abb47; /* Logo green color */
     padding: 15px 20px;
-    border-radius: 12px;
+    border-radius: 12px; /* Increased roundness to match logo */
     margin-bottom: 20px;
 }
 
 .logo-container {
-    max-width: 150px;
-    flex-shrink: 0;
+    max-width: 150px; /* Smaller logo */
+    flex-shrink: 0; /* Prevent logo from shrinking */
 }
 
 .logo-container img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 8px; /* Slightly round the logo edges */
 }
 
 .main-nav {
     display: flex;
-    gap: 10px;
+    gap: 10px; /* Space between navigation items */
 }
 
 .main-nav a {
@@ -41,14 +40,13 @@
     padding: 8px 15px;
     border-radius: 4px;
     transition: background-color 0.3s;
-    white-space: nowrap;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .main-nav a:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Base Styles */
 body {
     font-family: var(--font-family);
     line-height: 1.6;
@@ -66,6 +64,7 @@ body {
     text-align: center;
 }
 
+/* Rest of the existing CSS remains the same */
 .container {
     background-color: white;
     border-radius: 10px;
@@ -73,158 +72,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Filter Sentence Responsive Design */
-.filter-sentence {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--light-color);
-    padding: 15px;
-    border-radius: 8px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-size: 18px;
-}
-
-.filter-sentence span {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-}
-
-.filter-sentence .dropdown {
-    margin: 0 5px;
-}
-
-.dropdown select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px 35px 10px 15px;
-    font-size: 16px;
-    min-width: 150px;
-    max-width: 100%;
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    cursor: pointer;
-}
-
-/* Multi-Select Options */
-.multi-select-container {
-    margin-bottom: 15px;
-}
-
-.multi-select-container label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: var(--dark-color);
-}
-
-
-.multi-select-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.multi-select-option {
-    position: relative;
-    flex-grow: 1;
-    text-align: center;
-    min-width: 100px;
-}
-
-.multi-select-option:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.multi-select-option input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.multi-select-option.selected {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-/* Style the label to look like the previous button */
-.multi-select-option label {
-    display: block;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0;
-}
-
-.multi-select-option label:hover {
-    background-color: #5abb47;
-    color: white;
-}
-
-/* Style for when checkbox is checked */
-.multi-select-option input[type="checkbox"]:checked + label {
-    background-color: #5abb47; /* Your primary color */
-    color: white;
-    border-color: #5abb47;
-}
-
-
-/* Button Container */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.btn {
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 8px;
-    width: 100%;
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #4a9639;
-}
-
-.reset-btn {
-    background-color: #f8f9fa;
-    color: var(--secondary-color);
-    border: 1px solid #ddd;
-}
-
-.reset-btn:hover {
-    background-color: #e9ecef;
-}
-
-/* Responsive Adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .site-header {
         flex-direction: column;
@@ -246,32 +94,199 @@ body {
         text-align: center;
         margin: 5px 0;
     }
-
-    .filter-sentence {
-        flex-direction: column;
-        align-items: stretch;
-        font-size: 16px;
-    }
-
-    .filter-sentence span {
-        margin-bottom: 10px;
-    }
-
-    .dropdown select {
-        width: 100%;
-        margin: 0;
-    }
-
-    .button-container {
-        flex-direction: column;
-    }
 }
 
-@media (max-width: 480px) {
-    .multi-select-option {
-        flex-basis: calc(50% - 10px);
-        margin-bottom: 10px;
-    }
+.main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Container and Layout */
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--font-family);
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+}
+
+/* Filter Sentence */
+.filter-sentence {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    background-color: var(--light-color);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.dropdown {
+    position: relative;
+    display: inline;
+}
+
+.dropdown select {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: var(--primary-color);
+    border-bottom: 2px dashed var(--primary-color);
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+    max-width: 100%;
+    font-family: var(--font-family);
+}
+
+.dropdown select:focus {
+    outline: none;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Multi-select Options */
+.multi-select-container {
+    margin-bottom: 20px;
+}
+
+.multi-select-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--dark-color);
+}
+
+.multi-select-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.multi-select-option {
+    background-color: var(--light-color);
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.multi-select-option.selected {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Checkboxes */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    min-width: 150px;
+}
+
+.checkbox-item input {
+    margin-right: 8px;
+}
+
+/* Buttons */
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #4a9639; /* Darker green */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reset-btn {
+    background-color: #f8f9fa;
+    color: var(--secondary-color);
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: 1px solid #ddd;
+}
+
+.reset-btn:hover {
+    background-color: #e9ecef;
+}
+
+.copy-btn {
+    margin-top: 15px;
+    background-color: #28a745;
+    color: white;
+}
+
+.copy-btn:hover {
+    background-color: #218838;
 }
 
 /* Activity Cards */
@@ -304,21 +319,19 @@ body {
     padding-bottom: 8px;
 }
 
-.tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
+.activity-card p {
+    margin: 8px 0;
 }
 
-.tag {
-    background-color: #f0f0f0;
-    border-radius: 15px;
-    padding: 3px 8px;
-    font-size: 12px;
+.activity-card .attribute {
+    font-weight: bold;
 }
 
-/* Form elements, success/error messages, etc. would follow here */
+.activity-card .value {
+    display: inline-block;
+}
+
+/* Tags */
 .tags-container {
     display: flex;
     flex-wrap: wrap;
