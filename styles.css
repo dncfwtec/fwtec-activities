@@ -7,6 +7,16 @@
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #5abb47; /* Logo green color */
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
 body {
     font-family: var(--font-family);
     line-height: 1.6;
@@ -19,9 +29,9 @@ body {
 
 /* Logo and Header Styles */
 .logo-container {
-    text-align: center;
-    margin: 20px auto;
-    max-width: 300px;
+    text-align: left;
+    margin: 0;
+    max-width: 200px; /* Reduced size */
 }
 
 .logo-container img {
@@ -30,10 +40,8 @@ body {
 }
 
 .app-title {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-    font-weight: 600;
+    padding-top: 10px;
+    margin-top: 10px;
 }
 
 /* Navigation */
@@ -435,12 +443,18 @@ pre {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .container {
-        padding: 15px;
+    .site-header {
+        flex-direction: column;
+        padding: 10px;
     }
-
-    .checkbox-item {
-        min-width: 120px;
+    
+    .logo-container {
+        margin-bottom: 10px;
+    }
+    
+    .main-nav {
+        justify-content: center;
+        width: 100%;
     }
 }
 
