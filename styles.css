@@ -1,0 +1,65 @@
+:root {
+    --primary-color: #5abb47; /* Green from logo */
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo-container {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}
+
+.app-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Override button colors to match logo green */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #4a9639; /* Darker green */
+    border-color: #4a9639;
+}
+
+.multi-select-option.selected {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Style for navigation menu */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
