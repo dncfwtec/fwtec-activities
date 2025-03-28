@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Activities Filter</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--dark-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-sentence {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline;
+        }
+
+        .dropdown select {
+            appearance: none;
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-bottom: 2px dashed var(--primary-color);
+            cursor: pointer;
+            font-size: 18px;
+            margin: 0 5px;
+            max-width: 100%;
+            font-family: var(--font-family);
+        }
+
+        .dropdown select:focus {
+            outline: none;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .multi-select-container {
+            margin-bottom: 20px;
+        }
+
+        .multi-select-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+
+        .multi-select-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .multi-select-option {
+            background-color: var(--light-color);
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .multi-select-option.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Activity Cards Styling */
+        .activities-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .activity-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .activity-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        
+        .activity-card p {
+            margin: 8px 0;
+        }
+        
+        .activity-card .attribute {
+            font-weight: bold;
+        }
+        
+        .activity-card .value {
+            display: inline-block;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            padding: 3px 8px;
+            font-size: 12px;
+        }
+        
+        .tag.ball-red { background-color: #ffcdd2; }
+        .tag.ball-orange { background-color: #ffe0b2; }
+        .tag.ball-green { background-color: #c8e6c9; }
+        .tag.focus-fh { background-color: #bbdefb; }
+        .tag.focus-bh { background-color: #d1c4e9; }
+        .tag.skill { background-color: #b2ebf2; }
+        .tag.rules { background-color: #f8bbd0; }
+        .tag.sel { background-color: #e6ee9c; }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .stats-container {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading-spinner:after {
+            content: " ";
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            margin: 8px;
+            border-radius: 50%;
+            border: 6px solid var(--primary-color);
+            border-color: var(--primary-color) transparent var(--primary-color) transparent;
+            animation: spinner 1.2s linear infinite;
+        }
+        
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .reset-btn {
+            background-color: #f8f9fa;
+            color: var(--secondary-color);
+            padding: 8px 16px;
+            margin-left: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .reset-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .filter-sentence {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .dropdown select {
+                font-size: 16px;
+                max-width: 150px;
+            }
+            
+            .activities-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tennis Activities Filter</h1>
+        
+        <div class="filter-sentence" id="filterSentence">
+            I'm on <span class="dropdown">
+                <select id="courtType">
+                    <option value="">any</option>
+                    <option value="standard">standard</option>
+                    <option value="mini">mini</option>
+                </select>
+            </span> courts with <span class="dropdown">
+                <select id="groupSize">
+                    <option value="">any number of</option>
+                    <option value="4-10">4-10</option>
+                    <option value="10-16">10-16</option>
+                </select>
+            </span> students per <span class="dropdown">
+                <select id="courtSetup">
+                    <option value="">any setup</option>
+                    <option value="one court">one court</option>
+                    <option value="multiple courts">multiple courts</option>
+                </select>
+            </span>. They are <span class="dropdown">
+                <select id="gradeLevel">
+                    <option value="">any grade</option>
+                    <option value="Elementary">Elementary</option>
+                    <option value="Middle">Middle</option>
+                    <option value="High">High</option>
+                </select>
+            </span> school students with <span class="dropdown">
+                <select id="skillLevel">
+                    <option value="">any skill level</option>
+                    <option value="mixed skills">mixed skills</option>
+                    <option value="beginners only">beginners only</option>
+                    <option value="returners only">returners only</option>
+                </select>
+            </span>.
+        </div>
+        
+        <div class="multi-select-container">
+            <label>Ball Type:</label>
+            <div class="multi-select-options" id="ballType">
+                <div class="multi-select-option" data-value="Ball Red">Red</div>
+                <div class="multi-select-option" data-value="Ball Orange">Orange</div>
+                <div class="multi-select-option" data-value="Ball Green/Yellow">Green/Yellow</div>
+            </div>
+        </div>
+        
+        <div class="multi-select-container">
+            <label>Technical Focus:</label>
+            <div class="multi-select-options" id="technicalFocus">
+                <div class="multi-select-option" data-value="FH Focus">Forehand</div>
+                <div class="multi-select-option" data-value="BH Focus">Backhand</div>
+            </div>
+        </div>
+        
+        <div class="multi-select-container">
+            <label>Skill Focus:</label>
+            <div class="multi-select-options" id="skillFocus">
+                <div class="multi-select-option" data-value="Rally Building">Rally Building</div>
+                <div class="multi-select-option" data-value="Volley">Volley</div>
+                <div class="multi-select-option" data-value="Overhead">Overhead</div>
+                <div class="multi-select-option" data-value="Serve">Serve</div>
+            </div>
+        </div>
+        
+        <div class="multi-select-container">
+            <label>Rules Knowledge:</label>
+            <div class="multi-select-options" id="rulesKnowledge">
+                <div class="multi-select-option" data-value="Point Play">Point Play</div>
+                <div class="multi-select-option" data-value="Consistency">Consistency</div>
+                <div class="multi-select-option" data-value="Footwork">Footwork</div>
+            </div>
+        </div>
+        
+        <div class="multi-select-container">
+            <label>SEL Goals:</label>
+            <div class="multi-select-options" id="selGoals">
+                <div class="multi-select-option" data-value="Sportsmanship">Sportsmanship</div>
+                <div class="multi-select-option" data-value="Teamwork">Teamwork</div>
+                <div class="multi-select-option" data-value="Problem-solving">Problem-solving</div>
+                <div class="multi-select-option" data-value="Positive Reinforcement">Positive Reinforcement</div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="btn btn-primary" id="filterButton">Find Tennis Activities</button>
+            <button class="btn reset-btn" id="resetButton">Reset All</button>
+        </div>
+        
+        <div id="loadingSpinner" class="loading-spinner"></div>
+        
+        <div id="statsContainer" class="stats-container" style="display: none;">
+            Showing <span id="resultsCount">0</span> of <span id="totalActivities">0</span> activities
+        </div>
+        
+        <!-- Activities will be displayed here -->
+        <div id="activitiesContainer" class="activities-container">
+            <!-- Cards will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        // Will be loaded from external file
+        let tennisActivities = [];
+        
+        // Load activities data from external JSON file
+        async function loadActivitiesData() {
+            try {
+                const response = await fetch('tennis-activities-data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                tennisActivities = await response.json();
+                document.getElementById('totalActivities').textContent = tennisActivities.length;
+                
+                // Show initial activities
+                displayActivities(tennisActivities);
+            } catch (error) {
+                console.error('Error loading activities data:', error);
+                document.getElementById('activitiesContainer').innerHTML = 
+                    '<div class="no-results">Error loading activities data. Please try refreshing the page.</div>';
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the activities data
+            loadActivitiesData();
+            
+            // Set up multi-select options
+            const multiSelectContainers = document.querySelectorAll('.multi-select-options');
+            multiSelectContainers.forEach(container => {
+                const options = container.querySelectorAll('.multi-select-option');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        this.classList.toggle('selected');
+                    });
+                });
+            });
+            
+            // Set up filter button
+            const filterButton = document.getElementById('filterButton');
+            filterButton.addEventListener('click', filterActivities);
+            
+            // Set up reset button
+            const resetButton = document.getElementById('resetButton');
+            resetButton.addEventListener('click', resetFilters);
+        });
+
+        // Reset all filters
+        function resetFilters() {
+            // Reset dropdowns
+            document.getElementById('courtType').value = '';
+            document.getElementById('groupSize').value = '';
+            document.getElementById('courtSetup').value = '';
+            document.getElementById('gradeLevel').value = '';
+            document.getElementById('skillLevel').value = '';
+            
+            // Reset multi-select options
+            document.querySelectorAll('.multi-select-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Show all activities
+            displayActivities(tennisActivities);
+        }
+
+        // Filter activities based on current selections
+        function filterActivities() {
+            // Show loading spinner
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'block';
+            
+            // Hide activities container while loading
+            const activitiesContainer = document.getElementById('activitiesContainer');
+            activitiesContainer.style.display = 'none';
+            
+            // Use setTimeout to allow the UI to update before processing
+            setTimeout(() => {
+                // Get all filter values
+                const courtType = document.getElementById('courtType').value;
+                const groupSize = document.getElementById('groupSize').value;
+                const courtSetup = document.getElementById('courtSetup').value;
+                const gradeLevel = document.getElementById('gradeLevel').value;
+                const skillLevel = document.getElementById('skillLevel').value;
+                
+                // Get multi-select values
+                const ballTypes = getSelectedValues('ballType');
+                const technicalFocus = getSelectedValues('technicalFocus');
+                const skillFocus = getSelectedValues('skillFocus');
+                const rulesKnowledge = getSelectedValues('rulesKnowledge');
+                const selGoals = getSelectedValues('selGoals');
+                
+                // Filter the activities
+                const filteredActivities = tennisActivities.filter(activity => {
+                    // Check single-select matches
+                    if (courtType && activity["Court Type"] !== courtType) return false;
+                    if (groupSize && activity["Group Size"] !== groupSize) return false;
+                    if (courtSetup && activity["Court Setup"] !== courtSetup) return false;
+                    if (gradeLevel && activity["Student Grade Level"] !== gradeLevel) return false;
+                    if (skillLevel && activity["Skill Level"] !== skillLevel) return false;
+                    
+                    // Check multi-select matches (if any options are selected)
+                    if (ballTypes.length > 0) {
+                        const hasBallType = ballTypes.some(type => activity[type] === true);
+                        if (!hasBallType) return false;
+                    }
+                    
+                    if (technicalFocus.length > 0) {
+                        const hasTechnicalFocus = technicalFocus.some(focus => activity[focus] === true);
+                        if (!hasTechnicalFocus) return false;
+                    }
+                    
+                    if (skillFocus.length > 0) {
+                        const hasSkillFocus = skillFocus.some(skill => activity[skill] === true);
+                        if (!hasSkillFocus) return false;
+                    }
+                    
+                    if (rulesKnowledge.length > 0) {
+                        const hasRulesKnowledge = rulesKnowledge.some(rule => activity[rule] === true);
+                        if (!hasRulesKnowledge) return false;
+                    }
+                    
+                    if (selGoals.length > 0) {
+                        const hasSelGoal = selGoals.some(goal => activity[goal] === true);
+                        if (!hasSelGoal) return false;
+                    }
+                    
+                    return true;
+                });
+                
+                // Update statistics
+                document.getElementById('resultsCount').textContent = filteredActivities.length;
+                document.getElementById('statsContainer').style.display = 'block';
+                
+                // Display the filtered activities
+                displayActivities(filteredActivities);
+                
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+                
+                // Show activities container
+                activitiesContainer.style.display = 'grid';
+            }, 10); // Small delay for UI update
+        }
+
+        // Helper function to get selected values from multi-select options
+        function getSelectedValues(containerId) {
+            const container = document.getElementById(containerId);
+            const selectedOptions = container.querySelectorAll('.multi-select-option.selected');
+            return Array.from(selectedOptions).map(option => option.dataset.value);
+        }
+
+        // Display activities in the container
+        function displayActivities(activities) {
+            const container = document.getElementById('activitiesContainer');
+            container.innerHTML = '';
+            
+            if (activities.length === 0) {
+                container.innerHTML = '<div class="no-results">No activities match your criteria. Try adjusting your filters.</div>';
+                return;
+            }
+            
+            activities.forEach(activity => {
+                const card = document.createElement('div');
+                card.className = 'activity-card';
+                
+                // Create card content
+                let html = `
+                    <h3>${activity["Activity Name"]}</h3>
+                    <p>${activity["Description"]}</p>
+                    <p><span class="attribute">Purpose:</span> <span class="value">${activity["Purpose"]}</span></p>
+                    <p><span class="attribute">Duration:</span> <span class="value">${activity["Duration"]}</span></p>
+                    <p><span class="attribute">Variations:</span> <span class="value">${activity["Variations"]}</span></p>
+                    <div class="tags-container">`;
+                
+                // Add tags
+                if (activity["Ball Red"]) html += '<span class="tag ball-red">Red Ball</span>';
+                if (activity["Ball Orange"]) html += '<span class="tag ball-orange">Orange Ball</span>';
+                if (activity["Ball Green/Yellow"]) html += '<span class="tag ball-green">Green/Yellow Ball</span>';
+                
+                if (activity["FH Focus"]) html += '<span class="tag focus-fh">Forehand</span>';
+                if (activity["BH Focus"]) html += '<span class="tag focus-bh">Backhand</span>';
+                
+                if (activity["Rally Building"]) html += '<span class="tag skill">Rally Building</span>';
+                if (activity["Volley"]) html += '<span class="tag skill">Volley</span>';
+                if (activity["Overhead"]) html += '<span class="tag skill">Overhead</span>';
+                if (activity["Serve"]) html += '<span class="tag skill">Serve</span>';
+                
+                if (activity["Point Play"]) html += '<span class="tag rules">Point Play</span>';
+                if (activity["Consistency"]) html += '<span class="tag rules">Consistency</span>';
+                if (activity["Footwork"]) html += '<span class="tag rules">Footwork</span>';
+                
+                if (activity["Sportsmanship"]) html += '<span class="tag sel">Sportsmanship</span>';
+                if (activity["Teamwork"]) html += '<span class="tag sel">Teamwork</span>';
+                if (activity["Problem-solving"]) html += '<span class="tag sel">Problem-solving</span>';
+                if (activity["Positive Reinforcement"]) html += '<span class="tag sel">Positive Reinforcement</span>';
+                
+                html += `</div>`;
+                card.innerHTML = html;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
