@@ -324,6 +324,27 @@
                 container.appendChild(card);
             });
         }
+    document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced multi-select functionality
+    const multiSelectContainers = document.querySelectorAll('.multi-select-options');
+    
+    multiSelectContainers.forEach(container => {
+        const options = container.querySelectorAll('.multi-select-option');
+        
+        options.forEach(option => {
+            option.addEventListener('click', function(event) {
+                // Prevent default to stop any potential native behavior
+                event.preventDefault();
+                
+                // Toggle selected class
+                this.classList.toggle('selected');
+                
+                // Optional: Prevent event from bubbling up
+                event.stopPropagation();
+            });
+        });
+    });
+});    
     </script>
 </body>
 </html>
